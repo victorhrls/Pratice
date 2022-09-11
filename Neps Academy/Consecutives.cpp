@@ -45,7 +45,7 @@ int main(){
 		
 	}
 	
-	cout << maior << endl;
+	cout << maior +1  << endl;
 
 
     return 0;
