@@ -2,39 +2,27 @@
 
 using namespace std;
 
-
 int main(){
-    int N,elemento;
-	int maior = 0; // pontuacao
-	int atual ;  // numero atual
-	int anterior =0;
-	int aux = 0; // pontuacao anterior
+    int N,seqAtual =1,seqMaior =1,num,anterior;
+
 	cin >> N;
-	
-	for (int i =0 ; i<N;i++)
+
+	for (int i =0;i<N;i++)
 	{
-		cin >> elemento;
-		atual = elemento;
-		
-		if ( atual == anterior)
-		{
-			maior +=1;
-		}else{
-			if(maior > aux){
-			aux = maior;  // guardo o maior elemento
-			maior = 1;
+		cin >> num;
+		if(i>0){
+			if(anterior == num) seqAtual++;
+			if(anterior !=num || i == N-1){
+				if(seqAtual > seqMaior) seqMaior = seqAtual;
+				seqAtual = 1;
 			}
 		}
-		
-		anterior = atual;
-		
-		if(i == N-1){
-			if (aux > maior){
-				maior = aux;
-			}
-		}
+
+		anterior = num;
 	}
 
-	cout << maior +1  << endl;
+	cout << seqMaior << endl;
+
+
     return 0;
 }
