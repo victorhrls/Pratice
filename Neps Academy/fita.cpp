@@ -1,9 +1,16 @@
 #include <iostream>
-#define MAX 10
+#include <algorithm>
+
+
+#define MAX 10005
 
 using namespace std;
 
 //Imprimir a fita quadriculada na entrada
+
+int smallest(int x,int y,int z){
+    return std::min({x,y,z});
+} 
 
 int main(){
 
@@ -15,63 +22,32 @@ int main(){
 
     for(int i =0;i<N;i++) {
         cin >> fita[i];  //adiciona os numeros na fita
-
+        //Primeiro vamos trocar todos os -1 por 10
+        if(fita[i]==-1) fita[i] = 10;
     }
 
-    /*for(int p=0;p<N;p++){
-        cout <<  "O valor do termo" << p<< " é" <<  " " << fita[p]<< endl;
-    }*/
+    //percorrer da esquerda para a direita , já alterando os valores 
+    //comparando com o zero mais próximo a esquerda
 
-    for(int j=0;j<N;j++){
-        if(fita[j]==-1){
-            //Devo procurar o 0 mais proximo
-            valor_d =0;
-            valor_e =0;
-            total =0;
-            for(int k=j+1;j<N-1;j++){
-                //direita
-                if(fita[k]!=0){
-                    valor_d++;
-                }else{
-                    valor_d++;
-                    break; //achou
-                }
-                cout << "O valor a direita é = " << valor_d<<endl;
-            for(int m=j-1;j>=0;j--){
-
-                if(fita[m]!=0){
-                    valor_e++;
-                }else{
-                    valor_e++;
-                    break; // achou
-                }
-                cout << "O valor a esquerda é = " << valor_e<<endl;
-            }
-        
-        
-                
-               
-
-            //pegar o menor valor
-            if(valor_d>=valor_e){
-                total = valor_e;
-            }else{
-                total = valor_d;
-            }
-            //Valor maior q 9
-            if(total >=9){
-                total = 9;
-            }
-
-            cout << total << " ";
-
-
-        }
-        }else{
-            cout << 0 << " ";  // se o valor for zero, imprime direto
-        }
-
+    for(int i = 1;i<N;i++){
+        fita[i] = smallest(9,fita[i-1]+1,fita[i]);
     }
+
+    //fazendo o analogo começando do penultimo numero
+
+    for(int i = N-2;i>=0;i--){
+        fita[i] = smallest(9,fita[i+1] +1,fita[i]);
+    }
+
+
+    for(int i = 0;i<N;i++){
+        cout << fita[i] << " ";
+    }
+
+
+
+
+    
 
     return 0;
 
